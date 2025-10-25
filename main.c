@@ -7,6 +7,7 @@
 #define FUEL_PRICE 310.0
 
 void addCities(int maxCities, char cityNames[][30], int *cityCount);
+void displayCities(char cityNames[][30], int cityCount);
 
 int main()
 {
@@ -35,6 +36,8 @@ int main()
         {
             case 1:addCities(MAX_CITIES,cityNames,&cityCount);
             break;
+            case 2:displayCities(cityNames, cityCount);
+            break;
             case 0:printf("Exiting..\n");
             break;
             default:printf("Invalid choice!\n");
@@ -45,7 +48,7 @@ int main()
 
     return 0;
 }
-
+//CITY MANAGEMENT
 void addCities(int maxCities, char cityNames[][30], int *cityCount)
 {
     int n;
@@ -65,4 +68,19 @@ void addCities(int maxCities, char cityNames[][30], int *cityCount)
     }
     printf("\n%d cities added.\n",n);
 
+}
+
+void displayCities(char cityNames[][30], int cityCount)
+{
+     if (cityCount == 0)
+        {
+        printf("No cities available!\n");
+        return;
+        }
+
+    printf("\nList of Cities :\n");
+    for (int i = 0; i < cityCount; i++)
+        {
+        printf("%d. %s\n", i, cityNames[i]);
+        }
 }
