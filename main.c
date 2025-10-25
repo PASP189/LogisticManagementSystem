@@ -11,6 +11,7 @@ void displayCities(char cityNames[][30], int cityCount);
 void renameCity(char cityNames[][30], int cityCount);
 void removeCity(char cityNames[][30], int *cityCount);
 void inputDistance(int distance[][30], char cityNames[][30], int cityCount);
+void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCount);
 
 int main()
 {
@@ -47,6 +48,8 @@ int main()
             case 4:removeCity(cityNames, &cityCount);
             break;
             case 5:inputDistance(distance,cityNames, cityCount);
+            break;
+            case 6:displayDistanceTable (distance,cityNames, cityCount);
             break;
             case 0:printf("Exiting..\n");
             break;
@@ -192,4 +195,31 @@ void inputDistance(int distance[][30], char cityNames[][30], int cityCount)
         distance [i][i]=0;
     }
     printf("Distances entered.\n");
+}
+
+void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCount)
+{
+     if ( cityCount == 0)
+    {
+        printf("No cities available!\n");
+        return;
+    }
+
+    printf("%-15s", "");
+    for (int i = 0; i < cityCount; i++)
+    {
+        printf("%-15s\t", cityNames[i]);
+    }
+    printf("\n");
+
+    for (int i = 0; i < cityCount; i++)
+    {
+        printf("%-15s\t", cityNames[i]);
+        for (int j = 0; j < cityCount; j++)
+        {
+            printf("%-15d\t", distance[i][j]);
+        }
+        printf("\n");
+    }
+
 }
