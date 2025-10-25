@@ -12,7 +12,7 @@ void renameCity(char cityNames[][30], int cityCount);
 void removeCity(char cityNames[][30], int *cityCount);
 void inputDistance(int distance[][30], char cityNames[][30], int cityCount);
 void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCount);
-
+void displayVehicles(char vehicleType[][10], int capacity[], float rate[], float speed[], float efficiency[], int count);
 
 int main()
 {
@@ -59,6 +59,8 @@ int main()
             case 5:inputDistance(distance,cityNames, cityCount);
             break;
             case 6:displayDistanceTable (distance,cityNames, cityCount);
+            break;
+            case 7:displayVehicles(vehicleType, capacity, rate, speed, efficiency, 3);
             break;
             case 0:printf("Exiting..\n");
             break;
@@ -232,3 +234,19 @@ void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCoun
     }
 
 }
+
+// VEHICLE MANAGEMENT
+void displayVehicles(char vehicleType[][10], int capacity[], float rate[], float speed[], float efficiency[], int count)
+{
+     int i;
+    printf("\nAvailable Vehicles:\n");
+    printf("-------------------------------------------------------------\n");
+    printf("Type\tCapacity(kg)\tRate/km(LKR)\tSpeed(km/h)\tEfficiency(km/l)\n");
+    printf("-------------------------------------------------------------\n");
+    for (i = 0; i < count; i++) {
+        printf("%s\t%d\t\t%.2f\t\t%.2f\t\t%.2f\n",
+               vehicleType[i], capacity[i], rate[i], speed[i], efficiency[i]);
+    }
+    printf("-------------------------------------------------------------\n");
+}
+
