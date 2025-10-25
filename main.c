@@ -8,6 +8,7 @@
 
 void addCities(int maxCities, char cityNames[][30], int *cityCount);
 void displayCities(char cityNames[][30], int cityCount);
+void renameCity(char cityNames[][30], int cityCount);
 
 int main()
 {
@@ -37,6 +38,8 @@ int main()
             case 1:addCities(MAX_CITIES,cityNames,&cityCount);
             break;
             case 2:displayCities(cityNames, cityCount);
+            break;
+            case 3:renameCity(cityNames, cityCount);
             break;
             case 0:printf("Exiting..\n");
             break;
@@ -84,3 +87,44 @@ void displayCities(char cityNames[][30], int cityCount)
         printf("%d. %s\n", i, cityNames[i]);
         }
 }
+
+void renameCity(char cityNames[][30], int cityCount)
+{
+    if (cityCount == 0)
+    {
+        printf("No cities available to rename!\n");
+        return;
+    }
+
+    int index;
+    printf("\nList of Cities: \n");
+    for (int i = 0; i < cityCount; i++)
+    {
+        printf("%d. %s\n", i, cityNames[i]);
+    }
+
+    printf("Enter city index to rename: ");
+    scanf("%d", &index);
+
+    if (index < 0 || index >= cityCount)
+    {
+        printf("Invalid index! Try again.\n");
+        return;
+    }
+
+    char newName[30];
+    printf("Enter new name for city: ");
+    scanf("%s", newName);
+
+    int j = 0;
+    while (newName[j] != '\0')
+    {
+        cityNames[index][j] = newName[j];
+        j++;
+    }
+    cityNames[index][j] = '\0';
+
+    printf("City renamed successfully!\n");
+
+}
+
