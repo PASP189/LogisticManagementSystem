@@ -10,11 +10,13 @@ void addCities(int maxCities, char cityNames[][30], int *cityCount);
 void displayCities(char cityNames[][30], int cityCount);
 void renameCity(char cityNames[][30], int cityCount);
 void removeCity(char cityNames[][30], int *cityCount);
+void inputDistance(int distance[][30], char cityNames[][30], int cityCount);
 
 int main()
 {
     char cityNames[MAX_CITIES][30];
     int cityCount = 0;
+    int distance[MAX_CITIES][30] = {0};
     int choice;
 
     do
@@ -43,6 +45,8 @@ int main()
             case 3:renameCity(cityNames, cityCount);
             break;
             case 4:removeCity(cityNames, &cityCount);
+            break;
+            case 5:inputDistance(distance,cityNames, cityCount);
             break;
             case 0:printf("Exiting..\n");
             break;
@@ -166,4 +170,26 @@ void removeCity(char cityNames[][30], int *cityCount)
     (*cityCount)--;
     printf("City removed successfully!! \n");
 
+}
+
+// DISTANCE MANAGEMNET
+void inputDistance(int distance[][30], char cityNames[][30], int cityCount)
+{
+    if (cityCount < 2)
+    {
+        printf("Need at least two cities to enter distances!\n");
+        return;
+    }
+
+    for(int i=0;i<cityCount;i++)
+    {
+        for(int j=i+1;j<cityCount;j++)
+        {
+            printf("Distance between %s and %s in(km):",cityNames[i],cityNames[j]);
+            scanf("%d",&distance[i][j]);
+            distance [j][i]=distance[i][j];
+        }
+        distance [i][i]=0;
+    }
+    printf("Distances entered.\n");
 }
