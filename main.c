@@ -13,12 +13,21 @@ void removeCity(char cityNames[][30], int *cityCount);
 void inputDistance(int distance[][30], char cityNames[][30], int cityCount);
 void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCount);
 
+
 int main()
 {
     char cityNames[MAX_CITIES][30];
     int cityCount = 0;
     int distance[MAX_CITIES][30] = {0};
     int choice;
+
+    // vehicle data
+    char vehicleType[3][10] = {"Van", "Truck", "Lorry"};
+    int capacity[3] = {1000, 5000, 10000};
+    float rate[3] = {30, 40, 80};
+    float speed[3] = {60, 50, 45};
+    float efficiency[3] = {12, 6, 4};
+    float fuelPrice;
 
     do
     {
