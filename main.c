@@ -13,6 +13,7 @@ void removeCity(char cityNames[][30], int *cityCount);
 void inputDistance(int distance[][30], char cityNames[][30], int cityCount);
 void displayDistanceTable(int distance[][30], char cityNames[][30], int cityCount);
 void displayVehicles(char vehicleType[][10], int capacity[], float rate[], float speed[], float efficiency[], int count);
+void calculateShortestPaths(int distance[][MAX_CITIES], int shortestDistance[][MAX_CITIES], int cityCount);
 
 int main()
 {
@@ -20,6 +21,8 @@ int main()
     int cityCount = 0;
     int distance[MAX_CITIES][30] = {0};
     int choice;
+      int shortestDistance[MAX_CITIES][MAX_CITIES] = {0};
+
 
     // vehicle data
     char vehicleType[3][10] = {"Van", "Truck", "Lorry"};
@@ -57,6 +60,8 @@ int main()
             case 4:removeCity(cityNames, &cityCount);
             break;
             case 5:inputDistance(distance,cityNames, cityCount);
+                    calculateShortestPaths(distance, shortestDistance, cityCount);
+                   printf("Shortest paths have been calculated and are ready for deliveries.\n");
             break;
             case 6:displayDistanceTable (distance,cityNames, cityCount);
             break;
@@ -248,5 +253,43 @@ void displayVehicles(char vehicleType[][10], int capacity[], float rate[], float
                vehicleType[i], capacity[i], rate[i], speed[i], efficiency[i]);
     }
     printf("-------------------------------------------------------------\n");
+}
+
+void calculateShortestPaths(int distance[][MAX_CITIES], int shortestDistance[][MAX_CITIES], int cityCount)
+{
+    // Copy the distance table into shortestDistance
+    for (int i = 0; i < cityCount; i++)
+    {
+        for (int j = 0; j < cityCount; j++)
+        {
+            shortestDistance[i][j] = distance[i][j];
+        }
+    }
+
+
+    for (int k = 0; k < cityCount; k++)
+    {
+        for (int i = 0; i < cityCount; i++)
+        {
+            for (int j = 0; j < cityCount; j++)
+            {
+                if (i == j || i == k || j == k)
+                    continue;
+
+                if (shortestDistance[i][k] != 0 && shortestDistance[k][j] != 0)
+                {
+                    int newDistance = shortestDistance[i][k] + shortestDistance[k][j];
+                    if (shortestDistance[i][j] == 0 || newDistance < shortestDistance[i][j])
+                    {
+                        shortestDistance[i][j] = newDistance;
+                        shortestDistance[j][i] = newDistance;
+                    }
+                }
+            }
+        }
+    }
+
+
+
 }
 
