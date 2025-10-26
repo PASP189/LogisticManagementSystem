@@ -16,6 +16,9 @@ void displayVehicles(char vehicleType[][10], int capacity[], float rate[], float
 void calculateShortestPaths(int distance[][MAX_CITIES], int shortestDistance[][MAX_CITIES], int cityCount);
 void handleDelivery(int *deliveryCount, int distance[][MAX_CITIES], char cityNames[][30], int cityCount,char vehicleType[][10],int capacity[], float rate[], float speed[],
         float efficiency[],int srcCity[], int destCity[], int vehicleUsed[], float distanceList[],float chargeList[], float timeList[], float weightList[], float profitList[]);
+void showDeliveries(int *deliveryCount, char cityNames[][30], char vehicleType[][10],int srcCity[], int destCity[], int vehicleUsed[],float distanceList[], float chargeList[],
+                     float timeList[],float weightList[], float profitList[]);
+
 
 int main()
 {
@@ -84,6 +87,8 @@ int main()
 
              case 8:handleDelivery(&deliveryCount, distance, cityNames, cityCount, vehicleType, capacity,rate, speed, efficiency, srcCity, destCity, vehicleUsed,
                                     distanceList, chargeList, timeList, weightList, profitList);
+            break;
+            case 9:showDeliveries(&deliveryCount,cityNames, vehicleType, srcCity, destCity, vehicleUsed,distanceList, chargeList, timeList, weightList, profitList);
             break;
             case 0:printf("Exiting...\n");
             break;
@@ -428,6 +433,30 @@ void handleDelivery(int *deliveryCount, int distance[][MAX_CITIES], char cityNam
     profitList[*deliveryCount] = profit;
 
     (*deliveryCount)++;
+
+}
+
+void showDeliveries(int *deliveryCount,char cityNames[][30],char vehicleType[][10],int srcCity[],int destCity[],int vehicleUsed[],float distanceList[],float chargeList[],float timeList[],float weightList[],float profitList[])
+{
+      if (*deliveryCount == 0)
+    {
+        printf("\nNo deliveries have been completed yet.\n");
+        return;
+    }
+    printf("\n-*- Completed Delivery Records -*-\n");
+    for (int i = 0; i < *deliveryCount; i++)
+        {
+        printf("\n--- Delivery #%d ---\n", i + 1);
+        printf("Route: %s -> %s\n", cityNames[srcCity[i]], cityNames[destCity[i]]);
+        printf("Distance: %.2f km\n", distanceList[i]);
+        printf("Vehicle: %s\n", vehicleType[vehicleUsed[i]]);
+        printf("Weight: %.2f kg\n", weightList[i]);
+        printf("Time: %.2f hours\n", timeList[i]);
+        printf("Charge: %.2f LKR\n", chargeList[i]);
+        printf("Profit: %.2f LKR\n", profitList[i]);
+        printf("----------------------\n");
+        }
+        printf("\nTotal Deliveries: %d\n", *deliveryCount);
 
 }
 
