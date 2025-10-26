@@ -266,7 +266,7 @@ void calculateShortestPaths(int distance[][MAX_CITIES], int shortestDistance[][M
         }
     }
 
-
+//  Floyd Warshall Algorithm is used
     for (int k = 0; k < cityCount; k++)
     {
         for (int i = 0; i < cityCount; i++)
@@ -282,7 +282,7 @@ void calculateShortestPaths(int distance[][MAX_CITIES], int shortestDistance[][M
                     if (shortestDistance[i][j] == 0 || newDistance < shortestDistance[i][j])
                     {
                         shortestDistance[i][j] = newDistance;
-                        shortestDistance[j][i] = newDistance;
+                        shortestDistance[j][i] = newDistance;// keep symmetry mentioned in the assignment.
                     }
                 }
             }
