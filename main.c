@@ -32,6 +32,18 @@ int main()
     float efficiency[3] = {12, 6, 4};
     float fuelPrice;
 
+    int selectedVehicle;
+    int deliveryCount=0;
+    int srcCity[MAX_DELIVERIES];
+    int destCity[MAX_DELIVERIES];
+    int vehicleUsed[MAX_DELIVERIES];
+    float distanceList[MAX_DELIVERIES];
+    float chargeList[MAX_DELIVERIES];
+    float timeList[MAX_DELIVERIES];
+    float weightList[MAX_DELIVERIES];
+    float profitList[MAX_DELIVERIES];
+
+
     do
     {
         printf("\n---  LOGISTIC MANAGEMENT MENU ---\n");
