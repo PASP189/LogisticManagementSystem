@@ -4,7 +4,7 @@
 
 #define MAX_CITIES 30
 #define MAX_DELIVERIES 50
-#define FUEL_PRICE 310.0
+#define FUEL_PRICE 310.0 //LKR per liter
 
 void addCities(int maxCities, char cityNames[][30], int *cityCount);
 void displayCities(char cityNames[][30], int cityCount);
@@ -51,7 +51,7 @@ int main()
 
 
     do
-    {
+    {//Main menu
         printf("\n---  LOGISTIC MANAGEMENT MENU ---\n");
         printf("1.Add a New City\n");
         printf("2.Display Cities\n");
@@ -498,6 +498,7 @@ void generateReports( int deliveryCount,char cityNames[][30],int srcCity[],int d
 
     float avgTime = totalTime / deliveryCount;
 
+    //display the report
     printf("\n================ DELIVERY PERFORMANCE REPORT =================\n");
     printf("Total Deliveries     : %d\n", deliveryCount);
     printf("Total Distance       : %.2f km\n", totalDistance);
