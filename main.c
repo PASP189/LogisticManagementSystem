@@ -18,6 +18,7 @@ void handleDelivery(int *deliveryCount, int distance[][MAX_CITIES], char cityNam
         float efficiency[],int srcCity[], int destCity[], int vehicleUsed[], float distanceList[],float chargeList[], float timeList[], float weightList[], float profitList[]);
 void showDeliveries(int *deliveryCount, char cityNames[][30], char vehicleType[][10],int srcCity[], int destCity[], int vehicleUsed[],float distanceList[], float chargeList[],
                      float timeList[],float weightList[], float profitList[]);
+void generateReports(int deliveryCount,char cityNames[][30],int srcCity[],int destCity[],float distanceList[],float chargeList[],float profitList[],float timeList[]);
 
 
 int main()
@@ -89,6 +90,8 @@ int main()
                                     distanceList, chargeList, timeList, weightList, profitList);
             break;
             case 9:showDeliveries(&deliveryCount,cityNames, vehicleType, srcCity, destCity, vehicleUsed,distanceList, chargeList, timeList, weightList, profitList);
+            break;
+            case 10:generateReports(deliveryCount,cityNames,srcCity,destCity,distanceList,chargeList,profitList,timeList);
             break;
             case 0:printf("Exiting...\n");
             break;
@@ -457,6 +460,56 @@ void showDeliveries(int *deliveryCount,char cityNames[][30],char vehicleType[][1
         printf("----------------------\n");
         }
         printf("\nTotal Deliveries: %d\n", *deliveryCount);
+
+}
+
+//PERFORMANCE REPORTS
+void generateReports( int deliveryCount,char cityNames[][30],int srcCity[],int destCity[],float distanceList[],float chargeList[],float profitList[],float timeList[])
+{
+     if (deliveryCount == 0)
+        {
+        printf("\nNo deliveries have been completed yet.\n");
+        return;
+        }
+
+    float totalDistance = 0, totalCharge = 0, totalProfit = 0, totalTime = 0;
+    float longest = 0.0;
+    float shortest = 1e9;
+    int longIndex = 0, shortIndex = 0;
+
+    for (int i = 0; i < deliveryCount; i++)
+        {
+        totalDistance += distanceList[i];
+        totalCharge += chargeList[i];
+        totalProfit += profitList[i];
+        totalTime += timeList[i];
+
+        if (distanceList[i] > longest)
+            {
+            longest = distanceList[i];
+            longIndex = i;
+            }
+        if (distanceList[i] < shortest &&  distanceList[i]>0)
+            {
+            shortest = distanceList[i];
+            shortIndex = i;
+            }
+        }
+
+    float avgTime = totalTime / deliveryCount;
+
+    printf("\n================ DELIVERY PERFORMANCE REPORT =================\n");
+    printf("Total Deliveries     : %d\n", deliveryCount);
+    printf("Total Distance       : %.2f km\n", totalDistance);
+    printf("Total Customer Charge: %.2f LKR\n", totalCharge);
+    printf("Total Profit         : %.2f LKR\n", totalProfit);
+    printf("Average Delivery Time: %.2f hours\n", avgTime);
+    printf("-------------------------------------------------------------\n");
+    printf("Longest Route  : %.2f km (%s -> %s)\n",
+           longest, cityNames[srcCity[longIndex]], cityNames[destCity[longIndex]]);
+    printf("Shortest Route : %.2f km (%s -> %s)\n",
+           shortest, cityNames[srcCity[shortIndex]], cityNames[destCity[shortIndex]]);
+    printf("==============================================================\n");
 
 }
 
